@@ -1,0 +1,155 @@
+import pandas as pd
+import nltk
+import re
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+
+
+     
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\amans\AppData\Roaming\nltk_data...
+[nltk_data]   Unzipping tokenizers\punkt.zip.
+[nltk_data] Downloading package stopwords to
+[nltk_data]     C:\Users\amans\AppData\Roaming\nltk_data...
+[nltk_data]   Unzipping corpora\stopwords.zip.
+[nltk_data] Downloading package wordnet to
+[nltk_data]     C:\Users\amans\AppData\Roaming\nltk_data...
+[nltk_data] Downloading package averaged_perceptron_tagger to
+[nltk_data]     C:\Users\amans\AppData\Roaming\nltk_data...
+[nltk_data]   Unzipping taggers\averaged_perceptron_tagger.zip.
+True
+
+text="Tokenization is the first step in text analytics. The process of breaking down a text paragraph into smaller chunks such as words or sentences is called Tokenization."
+
+tokenized_text=sent_tokenize(text)
+print(tokenized_text)
+tokenized_word=word_tokenize(text)
+print(tokenized_word)
+
+['Tokenization is the first step in text analytics.', 'The process of breaking down a text paragraph into smaller chunks such as words or sentences is called Tokenization.']
+['Tokenization', 'is', 'the', 'first', 'step', 'in', 'text', 'analytics', '.', 'The', 'process', 'of', 'breaking', 'down', 'a', 'text', 'paragraph', 'into', 'smaller', 'chunks', 'such', 'as', 'words', 'or', 'sentences', 'is', 'called', 'Tokenization', '.']
+
+stop_words=set(stopwords.words("english"))
+print(stop_words)
+text="How to remove stop words with NLTK library in Python?"
+text=re.sub('[^a-zA-Z]',' ',text)
+tokens=word_tokenize(text.lower())
+filtered_text=[]
+for w in tokens:
+    if w not in stop_words:
+        filtered_text.append(w)
+print("Tokenized Sentence:",tokens)
+print("Filtered Sentence:",filtered_text)
+
+{'have', 'own', 're', 'by', 'in', 'll', 'here', 'i', 'did', 't', 'won', "should've", "shan't", 'what', "won't", 'during', 'whom', 'above', 'ours', "doesn't", 'yours', 'haven', 'those', 'be', 'is', 'same', 'needn', 'we', 'she', 'the', "mightn't", "haven't", 'or', 'am', 'having', "hadn't", 'hadn', 'm', 'these', 'herself', 'each', 'against', "needn't", 'while', 'there', 'when', 'he', 'on', 'only', 'further', 'ourselves', 'more', 'just', "isn't", "shouldn't", 'been', 'can', 'his', 'an', 'are', 'to', 'yourself', 'for', 'other', 'some', "weren't", 'as', "couldn't", 'such', 'hers', 'yourselves', "wasn't", 'being', 'you', 'myself', 'very', "hasn't", 'that', 'into', 'our', "don't", 'your', 'once', 'off', 'and', 'this', 'too', 'any', 'it', 'then', 'again', 'under', 'itself', 'through', 's', 'ain', 'shouldn', 'isn', 'mustn', "wouldn't", 'how', 'few', 'o', 'them', 'wouldn', "you're", 'wasn', 'does', 'not', 'weren', 'was', 'had', 'why', 'down', "that'll", 'up', 'they', 'aren', 'a', 'themselves', 'so', 'between', "you've", 'd', 'theirs', 'now', 'doing', 'because', 'hasn', 'both', 'about', 'below', 'will', 'doesn', 'do', 'at', 've', 'of', 'before', 'which', "didn't", "she's", 'most', 'should', 'than', 'all', 'her', 'has', 'him', 'out', "mustn't", 'after', 'from', 'were', 'don', 'y', 'its', "it's", 'but', 'where', "you'll", 'who', 'me', 'didn', 'with', 'couldn', 'their', 'my', 'no', 'mightn', 'if', 'shan', 'over', "aren't", 'ma', 'until', 'nor', "you'd", 'himself'}
+Tokenized Sentence: ['how', 'to', 'remove', 'stop', 'words', 'with', 'nltk', 'library', 'in', 'python']
+Filtered Sentence: ['remove', 'stop', 'words', 'nltk', 'library', 'python']
+
+e_words=["wait","waiting","waited","waits"]
+ps=PorterStemmer()
+for w in e_words:
+    rootWord=ps.stem(w)
+print(rootWord)
+
+wait
+
+import nltk
+nltk.download('omw-1.4')
+wordnet_lemmatizer=WordNetLemmatizer()
+text="studies studying cries cry"
+tokenization=nltk.word_tokenize(text)
+for w in tokenization:
+    print("Lemma for {} is {}".format(w,wordnet_lemmatizer.lemmatize(w)))   
+
+[nltk_data] Downloading package omw-1.4 to
+[nltk_data]     C:\Users\amans\AppData\Roaming\nltk_data...
+Lemma for studies is study
+Lemma for studying is studying
+Lemma for cries is cry
+Lemma for cry is cry
+
+data="The pink sweater fit her perfectly"
+words=word_tokenize(data)
+for word in words:
+    print(nltk.pos_tag([word]))
+
+[('The', 'DT')]
+[('pink', 'NN')]
+[('sweater', 'NN')]
+[('fit', 'NN')]
+[('her', 'PRP$')]
+[('perfectly', 'RB')]
+
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+import math
+
+documentA='Jupiter is the largest Planet'
+documentB='Mars is the fourth planet from the Sun'
+bagOfWordsA=documentA.split(' ')
+bagOfWordsB=documentB.split(' ')
+uniqueWords=set(bagOfWordsA).union(set(bagOfWordsB))
+numOfWordsA=dict.fromkeys(uniqueWords,0)
+for word in bagOfWordsA:
+    numOfWordsA[word]+=1
+    numOfWordsB=dict.fromkeys(uniqueWords,0)
+for word in bagOfWordsB:
+    numOfWordsB[word]+=1
+
+def computeTF(wordDict,bagOfWords):
+    tfDict={}
+    bagOfWordsCount = len(bagOfWords)
+    for word, count in wordDict.items():
+        tfDict[word] = count / float(bagOfWordsCount)
+    return tfDict
+tfA = computeTF(numOfWordsA, bagOfWordsA)
+tfB = computeTF(numOfWordsB, bagOfWordsB)
+
+def computeIDF(documents):
+    N = len(documents)
+    idfDict = dict.fromkeys(documents[0].keys(), 0)
+    for document in documents:
+        for word, val in document.items():
+            if val > 0:
+                idfDict[word] += 1
+    for word, val in idfDict.items():
+        idfDict[word] = math.log(N / float(val))
+    return idfDict
+idfs = computeIDF([numOfWordsA, numOfWordsB])
+idfs
+
+{'from': 0.6931471805599453,
+ 'Sun': 0.6931471805599453,
+ 'Mars': 0.6931471805599453,
+ 'is': 0.0,
+ 'Jupiter': 0.6931471805599453,
+ 'largest': 0.6931471805599453,
+ 'fourth': 0.6931471805599453,
+ 'Planet': 0.6931471805599453,
+ 'the': 0.0,
+ 'planet': 0.6931471805599453}
+
+def computeTFIDF(tfBagOfWords, idfs):
+    tfidf = {}
+    for word, val in tfBagOfWords.items():
+        tfidf[word] = val * idfs[word]
+    return tfidf
+tfidfA = computeTFIDF(tfA, idfs)
+tfidfB = computeTFIDF(tfB, idfs)
+df = pd.DataFrame([tfidfA, tfidfB])
+
+df
+
+from	Sun	Mars	is	Jupiter	largest	fourth	Planet	the	planet
+0	0.000000	0.000000	0.000000	0.0	0.138629	0.138629	0.000000	0.138629	0.0	0.000000
+1	0.086643	0.086643	0.086643	0.0	0.000000	0.000000	0.086643	0.000000	0.0	0.086643
+ 

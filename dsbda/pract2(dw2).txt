@@ -1,0 +1,119 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("StudentPerformance.csv")
+df
+
+Gender	Maths Score	Reading Score	Writing Score	Placement Score	Club Join Year	Placement Offer Count
+0	M	68.0	50.0	12	95.0	2015	2
+1	M	66.0	NaN	45	65.0	2015	4
+2	F	98.0	49.0	24	48.0	2012	2
+3	M	57.0	43.0	50	NaN	2021	2
+4	F	98.0	35.0	45	52.0	2020	1
+5	M	93.0	35.0	32	87.0	2020	1
+6	M	53.0	32.0	25	84.0	2019	1
+7	F	NaN	42.0	24	65.0	2016	2
+8	F	75.0	28.0	42	48.0	2015	3
+9	F	76.0	29.0	43	59.0	2014	3
+10	M	59.0	41.0	31	92.0	2017	2
+11	M	64.0	32.0	35	68.0	2012	3
+12	M	42.0	36.0	36	79.0	2013	4
+13	M	81.0	42.0	45	92.0	2021	1
+14	F	45.0	45.0	21	48.0	2021	1
+
+df.isnull()
+
+Gender	Maths Score	Reading Score	Writing Score	Placement Score	Club Join Year	Placement Offer Count
+0	False	False	False	False	False	False	False
+1	False	False	True	False	False	False	False
+2	False	False	False	False	False	False	False
+3	False	False	False	False	True	False	False
+4	False	False	False	False	False	False	False
+5	False	False	False	False	False	False	False
+6	False	False	False	False	False	False	False
+7	False	True	False	False	False	False	False
+8	False	False	False	False	False	False	False
+9	False	False	False	False	False	False	False
+10	False	False	False	False	False	False	False
+11	False	False	False	False	False	False	False
+12	False	False	False	False	False	False	False
+13	False	False	False	False	False	False	False
+14	False	False	False	False	False	False	False
+
+series = pd.isnull(df["Maths Score"])
+df[series]
+
+Gender	Maths Score	Reading Score	Writing Score	Placement Score	Club Join Year	Placement Offer Count
+7	F	NaN	42.0	24	65.0	2016	2
+
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+df['Gender'] = le.fit_transform(df['Gender'])
+newdf=df
+df
+
+Gender	Maths Score	Reading Score	Writing Score	Placement Score	Club Join Year	Placement Offer Count
+0	1	68.0	50.0	12	95.0	2015	2
+1	1	66.0	NaN	45	65.0	2015	4
+2	0	98.0	49.0	24	48.0	2012	2
+3	1	57.0	43.0	50	NaN	2021	2
+4	0	98.0	35.0	45	52.0	2020	1
+5	1	93.0	35.0	32	87.0	2020	1
+6	1	53.0	32.0	25	84.0	2019	1
+7	0	NaN	42.0	24	65.0	2016	2
+8	0	75.0	28.0	42	48.0	2015	3
+9	0	76.0	29.0	43	59.0	2014	3
+10	1	59.0	41.0	31	92.0	2017	2
+11	1	64.0	32.0	35	68.0	2012	3
+12	1	42.0	36.0	36	79.0	2013	4
+13	1	81.0	42.0	45	92.0	2021	1
+14	0	45.0	45.0	21	48.0	2021	1
+
+missing_values = ["Na", "na"]
+df = pd.read_csv("StudentPerformance.csv", na_values =
+missing_values)
+df
+
+Gender	Maths Score	Reading Score	Writing Score	Placement Score	Club Join Year	Placement Offer Count
+0	M	68.0	50.0	12	95.0	2015	2
+1	M	66.0	NaN	45	65.0	2015	4
+2	F	98.0	49.0	24	48.0	2012	2
+3	M	57.0	43.0	50	NaN	2021	2
+4	F	98.0	35.0	45	52.0	2020	1
+5	M	93.0	35.0	32	87.0	2020	1
+6	M	53.0	32.0	25	84.0	2019	1
+7	F	NaN	42.0	24	65.0	2016	2
+8	F	75.0	28.0	42	48.0	2015	3
+9	F	76.0	29.0	43	59.0	2014	3
+10	M	59.0	41.0	31	92.0	2017	2
+11	M	64.0	32.0	35	68.0	2012	3
+12	M	42.0	36.0	36	79.0	2013	4
+13	M	81.0	42.0	45	92.0	2021	1
+14	F	45.0	45.0	21	48.0	2021	1
+
+ndf=df
+ndf.fillna(0)
+
+Gender	Maths Score	Reading Score	Writing Score	Placement Score	Club Join Year	Placement Offer Count
+0	M	68.0	50.0	12	95.0	2015	2
+1	M	66.0	0.0	45	65.0	2015	4
+2	F	98.0	49.0	24	48.0	2012	2
+3	M	57.0	43.0	50	0.0	2021	2
+4	F	98.0	35.0	45	52.0	2020	1
+5	M	93.0	35.0	32	87.0	2020	1
+6	M	53.0	32.0	25	84.0	2019	1
+7	F	0.0	42.0	24	65.0	2016	2
+8	F	75.0	28.0	42	48.0	2015	3
+9	F	76.0	29.0	43	59.0	2014	3
+10	M	59.0	41.0	31	92.0	2017	2
+11	M	64.0	32.0	35	68.0	2012	3
+12	M	42.0	36.0	36	79.0	2013	4
+13	M	81.0	42.0	45	92.0	2021	1
+14	F	45.0	45.0	21	48.0	2021	1
+
+col = ['Maths Score', 'Reading Score' , 'Writing Score','Placement Score']
+df.boxplot(col)
+
+<matplotlib.axes._subplots.AxesSubplot at 0x7ffd95278150>
