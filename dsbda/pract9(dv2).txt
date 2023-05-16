@@ -23,7 +23,6 @@ sns.distplot(data['Age'])
 plt.show()
 
 sns.scatterplot(tips["total_bill"], tips["tip"])
-<matplotlib.axes._subplots.AxesSubplot at 0x7f90d4b3fb50>
 
 sns.scatterplot(tips["total_bill"], tips["tip"], hue=tips["sex"])
 plt.show()
@@ -38,7 +37,6 @@ sns.barplot(data['Pclass'], data['Fare'], hue = data["Sex"])
 plt.show()
 
 sns.boxplot(data['Sex'], data["Age"])
-<matplotlib.axes._subplots.AxesSubplot at 0x7f90d4a636d0>
 
 sns.boxplot(data['Sex'], data["Age"], data["Survived"])
 plt.show()
@@ -49,14 +47,7 @@ plt.show()
 
 pd.crosstab(data['Pclass'], data['Survived'])
 
-Survived	0	1
-Pclass		
-1	52	106
-2	3	12
-3	5	5
-
 sns.heatmap(pd.crosstab(data['Pclass'], data['Survived']))
-<matplotlib.axes._subplots.AxesSubplot at 0x7f90d47b07d0>
 
 sns.clustermap(pd.crosstab(data['Parch'], data['Survived']))
 plt.show()
