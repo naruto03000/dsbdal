@@ -55,6 +55,7 @@ Y = np.array([1,1,1,2,2,2])
 
 from sklearn.naive_bayes import GaussianNB
 gaussian = GaussianNB()
+gaussian.fit(X,Y)
 
 Y_pred = gaussian.predict(X_test)
 
