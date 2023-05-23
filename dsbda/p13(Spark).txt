@@ -1,0 +1,19 @@
+1) spark -shell
+
+2) sudo apt search scala
+
+3) sudo apt install scala
+
+4) Sacla Program :- 
+file :- hello.scala :- 
+------------------------------------------------------
+object Sample {
+	def main(args:Array[String]) {
+		println("Hello World")
+	}
+	} 
+------------------------------------------------------
+5) :load hello.scala
+
+6) Sample.main(Array())
+
