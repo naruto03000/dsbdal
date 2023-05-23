@@ -35,6 +35,10 @@ print(np.where(df['Writing Score']<30))
 print(np.where((df['Placement Score']<50) & (df['Placement Offer Count']>1)))
 print(np.where((df['Placement Score']>85) & (df['Placement Offer Count']<3)))
 
+fig, ax=plt.subplots(figsize=(18,10))
+ax.scatter(df['Placement Score'],df['Placement Offer Count'])
+plt.show()
+
 sorted_rscore= sorted(df['Writing Score'])
 sorted_rscore
 
@@ -54,6 +58,13 @@ for i in sorted_rscore:
         r_outliers.append(i)
 print(r_outliers)
 
+from scipy import stats
+
+z = np.abs(stats.zscore(df['Math Score']))
+print(z)
+
+threshold = 0.18
+
 new_df=df
 for i in sample_outliers:
     new_df.drop(i,inplace=True)
@@ -67,6 +78,8 @@ median=np.median(sorted_rscore)
 median
 
 new_df['Math Score'].plot(kind = 'hist')
+plt.show()
+
 df['log_math'] = np.log10(df['Math Score'])
 df['log_math'].plot(kind = 'hist')
 plt.show()
