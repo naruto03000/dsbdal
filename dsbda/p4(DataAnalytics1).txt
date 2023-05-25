@@ -24,27 +24,6 @@ plt.scatter(x, y_pred)
 plt.scatter(x,y,c='r')
 plt.show()
 
-x=np.array([88,47,18,50,31])
-y=np.array([55,81,97,40,58])
-
-model= np.polyfit(x, y, 1)
-model
-
-predict = np.poly1d(model)
-predict(65)
-
-y_pred = predict(x)
-y_pred
-
-from sklearn.metrics import r2_score 
-r2_score(y, y_pred)
-
-y_line = model[1] + model[0]* x
-plt.plot(x, y_line, c = 'r')
-plt.scatter(x, y_pred)
-plt.scatter(x,y,c='r')
-plt.show()
-
 from sklearn.datasets import load_boston
 boston = load_boston()
 
